@@ -2,13 +2,18 @@
 
 package com.example.recipe;
 
-import com.example.recipe.Recipe;
-import java.util.*;
+import java.util.ArrayList;
 
 public interface RecipeRepository {
+
     ArrayList<Recipe> getRecipes();
 
     Recipe getRecipeById(int recipeId);
 
     Recipe addRecipe(Recipe recipe);
+
+    Recipe updateRecipe(int recipeId, Recipe recipe);
+
+    void deleteRecipe(int recipeId);
+
 }
