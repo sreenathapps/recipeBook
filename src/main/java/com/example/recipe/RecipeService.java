@@ -1,5 +1,7 @@
 package com.example.recipe;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import com.example.recipe.RecipeRepository;
 import com.example.recipe.Recipe;
 
@@ -28,4 +30,30 @@ public class RecipeService implements RecipeRepository {
         // Don't modify the above code
 
         // Write your code here
+        int uniqueId = 6;
+
+        @Override
+        public ArrayList<Recipe> getRecipes() {
+                Collection<Recipe> recipeCollection = recipeBook.values();
+                ArrayList<Recipe> recipes = new ArrayList<>(recipeCollection);
+                return recipes;
+        }
+
+        @Override
+
+        public Recipe getRecipeById(int recipeId) {
+                Recipe recipe = recipeBook.get(recipeId);
+                if (recipe == null) {
+                        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                }
+                return recipe;
+        }
+
+        @Override
+        public Recipe addRecipe(Recipe recipe) {
+                recipe.setRecipeId(uniqueId);
+                recipeBook.put(uniqueId, recipe);
+                uniqueId++;
+                return recipe;
+        }
 }
